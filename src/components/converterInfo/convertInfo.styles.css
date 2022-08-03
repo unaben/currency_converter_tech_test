@@ -1,0 +1,13 @@
+.convertInfo_wrapper h3{
+    font-weight: bold;
+    font-size: x-large;
+}
+
+.convertInfo_wrapper p{
+    font-size: x-large;
+}
+
+.convertInfo_wrapper h3 span{
+    font-weight: bolder;
+    font-size: xx-large;
+}

@@ -1,0 +1,6 @@
+.converter_wrapper{
+    border: 2px solid lightgray;
+    border-radius: 8px;
+    padding: 20px;
+    width: fit-content;
+}
