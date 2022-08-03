@@ -4,9 +4,9 @@ import { DataSlice } from "../../interface/converter";
 interface ConverterSliceState {
   currenciesData: DataSlice[];
   base: string;
-  amount: number | null;
+  amount: number;
   convertTo: string;
-  result: number | null;
+  result: number;
   date: Date | null;
   pending: boolean;
   error: boolean;

@@ -16,7 +16,7 @@ const ConvertInfo: FC<ConvertInfoProprs> = ({ handleSwap }) => {
         {amount} {base} is equivalent to
       </h3>
       <h3>
-        {result === NaN ? 0 : result} {convertTo}
+        {isNaN(result) ? 0 : result} {convertTo}
       </h3>
       <p>As of {date?.toString()}</p>
       <h3 onClick={handleSwap}>
