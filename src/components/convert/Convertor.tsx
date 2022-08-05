@@ -1,15 +1,15 @@
-import React, { ChangeEvent } from "react";
-import BaseCurrency from "../base/BaseCurrency";
 import ConvertInfo from "../converterInfo/ConvertInfo";
-import ConvertToCurrency from "../convertTo/ConvertToCurrency";
 import { useAppDispatch, useAppSelector } from "../hooks/useRoot";
 import { update } from "../features/converterSlice";
-import './convert.style.css'
+import "./convert.style.css";
+import CurrenyRow from "../CurrencyRow/CurrenyRow";
 
 const Convertor = () => {
   const initialState = useAppSelector((state) => state.options);
 
-  const { base, convertTo, amount } = initialState;
+  const { base, convertTo, amount, result } = initialState;
+
+  const dispatch = useAppDispatch();
 
   const convertToLower = convertTo.toLowerCase();
   const resDate = initialState.currenciesData[convertToLower]?.date;
@@ -17,29 +17,33 @@ const Convertor = () => {
     initialState.currenciesData[convertToLower]?.rate * Number(amount)
   ).toFixed(2);
 
-  const dispatch = useAppDispatch();
-
-  const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-
+  const handleBaseAmountChange = (value: number) => {   
     dispatch(
       update({
         ...initialState,
-        amount: Number(e.target.value),
+        amount: value,
         date: resDate,
         result: Number(total),
       })
     );
   };
 
-  const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
-    e.preventDefault();
-    const { name, value } = e.target;
-
+  const handleBaseCurrencyChange = (value: string) => {
     dispatch(
       update({
         ...initialState,
-        [name]: value,
+        base: value,
+        date: resDate,
+        result: Number(total),
+      })
+    );
+  };
+
+  const handleConvertToCurrencyChange = (value: string) => {    
+    dispatch(
+      update({
+        ...initialState,
+        convertTo: value,
         date: resDate,
         result: Number(total),
       })
@@ -60,11 +64,22 @@ const Convertor = () => {
   return (
     <section className="converter_wrapper">
       <ConvertInfo handleSwap={handleSwap} />
-      <BaseCurrency
-        handleChangeInput={handleChangeInput}
-        handleSelect={handleSelect}
+      <CurrenyRow
+        onAmountChange={handleBaseAmountChange}
+        onCurrencyChange={handleBaseCurrencyChange}
+        selectedCurrency={base}
+        amount={amount}
+        readonly={false}
+        valMessage="Number expected"
       />
-      <ConvertToCurrency handleSelect={handleSelect} />
+      <CurrenyRow
+        onAmountChange={handleBaseAmountChange}
+        onCurrencyChange={handleConvertToCurrencyChange}
+        selectedCurrency={convertTo}
+        amount={result}
+        readonly={true}
+        valMessage=""
+      />
     </section>
   );
 };
