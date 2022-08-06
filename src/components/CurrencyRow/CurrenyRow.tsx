@@ -7,7 +7,6 @@ interface CurrenyRowProps {
   selectedCurrency: string;
   amount: number;
   readonly: boolean;
-  valMessage: string;
 }
 
 const CurrenyRow: FC<CurrenyRowProps> = ({
@@ -16,19 +15,24 @@ const CurrenyRow: FC<CurrenyRowProps> = ({
   selectedCurrency,
   amount,
   readonly,
-  valMessage,
 }) => {
   const currencies = StoreData();
+
+  const handleError = () => {
+    if (isNaN(amount)) alert("Number required, refresh page to continue");
+  };
+  setTimeout(handleError, 1000);
+
   return (
     <div>
-      {typeof amount === "string" && <span>{valMessage}</span>}
       <div>
         <input
-          type="number"
+          // type="number"
           readOnly={readonly}
           value={Number(amount)}
           onChange={(e) => onAmountChange(Number(e.target.value))}
           className="form-control form-control-lg mx-5"
+          // onBlur={handleError}
         />
         <select
           name="base"

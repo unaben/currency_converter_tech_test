@@ -70,7 +70,7 @@ const Convertor = () => {
         selectedCurrency={base}
         amount={amount}
         readonly={false}
-        valMessage="Number expected"
+       
       />
       <CurrenyRow
         onAmountChange={handleBaseAmountChange}
@@ -78,7 +78,7 @@ const Convertor = () => {
         selectedCurrency={convertTo}
         amount={result}
         readonly={true}
-        valMessage=""
+        
       />
     </section>
   );
