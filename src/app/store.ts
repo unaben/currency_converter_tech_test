@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import converterReducer from "../features/converterSlice";
+import converterReducer from "./features/converterSlice";
 
 const store = configureStore({
   reducer: {

@@ -1,22 +1,16 @@
 import React, { FC } from "react";
-import { StoreData } from "../hooks/useCurrencyOptions";
+import { useStoreData } from "../../hooks/useCurrencyOptions";
+import { ICurrenyRowProps } from "./currencyRow.type";
 
-interface CurrenyRowProps {
-  onAmountChange: (e: number) => void;
-  onCurrencyChange: (e: string) => void;
-  selectedCurrency: string;
-  amount: number;
-  readonly: boolean;
-}
 
-const CurrenyRow: FC<CurrenyRowProps> = ({
+const CurrenyRow: FC<ICurrenyRowProps> = ({
   onAmountChange,
   onCurrencyChange,
   selectedCurrency,
   amount,
   readonly,
 }) => {
-  const currencies = StoreData();
+  const currencies = useStoreData();
 
   const handleError = () => {
     if (isNaN(amount)) alert("Number required, refresh page to continue");

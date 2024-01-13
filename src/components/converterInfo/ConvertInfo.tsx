@@ -1,14 +1,14 @@
-import React, { FC } from "react";
-import { useAppSelector } from "../hooks/useRoot";
+import moment from "moment";
+import { useAppSelector } from "../../hooks/useRoot";
 import "./convertInfo.styles.css";
+import { RootState } from "../../app/store";
+import useCurrencyConversion from "../../hooks/useCurrencyConversion";
 
-interface ConvertInfoProprs {
-  handleSwap: (e: unknown) => void;
-}
-
-const ConvertInfo: FC<ConvertInfoProprs> = ({ handleSwap }) => {
-  const initialState = useAppSelector((state) => state.options);
+const ConvertInfo = () => {
+  const initialState = useAppSelector((state: RootState) => state.options);
   const { base, amount, convertTo, result, date } = initialState;
+
+  const { handleSwap } = useCurrencyConversion();
 
   return (
     <div className="convertInfo_wrapper">
@@ -18,7 +18,10 @@ const ConvertInfo: FC<ConvertInfoProprs> = ({ handleSwap }) => {
       <h3>
         {isNaN(result) ? 0 : result} {convertTo}
       </h3>
-      <p>As of {date?.toString()}</p>
+      <p>
+        As of &nbsp;
+        {moment(date?.toString()).format("dddd, MMMM DD YYYY, h:mm:ss a")}
+      </p>
       <h3 onClick={handleSwap}>
         <span>&#8595;&#8593;</span>
       </h3>

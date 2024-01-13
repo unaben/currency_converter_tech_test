@@ -1,9 +1,9 @@
 import React, { FC } from "react";
 import "./App.css";
 import Convertor from "./components/convert/Convertor";
-import { useAppDispatch } from "./components/hooks/useRoot";
+import { useAppDispatch } from "./hooks/useRoot";
 import { useEffect } from "react";
-import { getCurrency } from "./components/features/converterSlice";
+import { getCurrency } from "./app/features/converterSlice";
 
 const App: FC = () => {
   const dispatch = useAppDispatch();

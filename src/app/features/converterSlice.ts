@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { DataSlice } from "../../interface/converter";
+import { TCurrencyData } from "../../model/converter";
 
 interface ConverterSliceState {
-  currenciesData: DataSlice[];
+  currenciesData: TCurrencyData;
   base: string;
   amount: number;
   convertTo: string;
@@ -13,7 +13,7 @@ interface ConverterSliceState {
 }
 
 const initialState: ConverterSliceState = {
-  currenciesData: [],
+  currenciesData: {} as TCurrencyData,
   base: "USD",
   amount: 0,
   convertTo: "GBP",
@@ -27,13 +27,13 @@ const baseURL = `http://www.floatrates.com/daily/${initialState[
   "base"
 ].toLowerCase()}.json`;
 
-export const getCurrency = createAsyncThunk<DataSlice[]>(
+export const getCurrency = createAsyncThunk<TCurrencyData>(
   "options/getCurrencyData",
   async () => {
     try {
       const response = await fetch(baseURL);
-      const resData = response.json();
-      return resData;
+      const resCurrencyData = await response.json();
+      return resCurrencyData;
     } catch (error) {
       console.error(error);
     }
