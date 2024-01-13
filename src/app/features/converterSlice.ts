@@ -1,19 +1,9 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { TCurrencyData } from "../../model/converter";
-
-interface ConverterSliceState {
-  currenciesData: TCurrencyData;
-  base: string;
-  amount: number;
-  convertTo: string;
-  result: number;
-  date: Date | null;
-  pending: boolean;
-  error: boolean;
-}
+import { ConverterSliceState } from "../model/converterSlice.types";
 
 const initialState: ConverterSliceState = {
-  currenciesData: {} as TCurrencyData,
+  currenciesData: {},
   base: "USD",
   amount: 0,
   convertTo: "GBP",
